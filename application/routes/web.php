@@ -164,7 +164,7 @@ Route::get('/merchant/storefront/paypal/success', 'PayPalController@postStoreFro
 Route::get('/merchant/storefront/paypal/cancel', 'PayPalController@postStoreFrontCancel');
 
 //PAYSTACK VOUCHER ROUTES
-route::get('buyvoucher/paystack', 'PaystackController@buyvoucher')->middleware('auth');
+route::get('buyvoucher/flutterwave', 'FlutterwaveController@buyvoucher')->middleware('auth');
 route::post('buyvoucher/paystack', 'PaystackController@sendRequestToPayStack')->middleware('auth');
 route::get('pay/voucher/paystack/success', 'PaystackController@payVoucherPayStackSuccess')->middleware('auth');
 Route::post('/merchant/storefront/paystack/{ref}', 'PaystackController@postStoreFront')->name('paystackstorefront');
@@ -199,3 +199,6 @@ route::get('/escrow/{eid}', 'EscrowController@agreement')->middleware('auth');
 //Bitcoin Routes
 Route::post('bitcoin/address', 'BitcoinController@create')->name('bitcoin.wallet')->middleware('auth');
 Route::get('bitcoin/address', 'BitcoinController@getaddress')->middleware('auth');
+
+Route::post('/pay', 'RaveController@initialize')->name('pay');
+Route::post('/rave/callback', 'RaveController@callback')->name('callback');

@@ -19,7 +19,7 @@
                         <h3 class="product-title m-b-0"><?php echo e(__('Add funds to your wallet with Flutterwave')); ?></h3>                        
                         
                         <div class="action">
-                          <form class="d-flex justify-content-left" method="post" action="<?php echo e(url('/')); ?>/buyvoucher/paystack">
+                          <form class="d-flex justify-content-left" method="post" action="<?php echo e(route('pay')); ?>">
                           	<div class="row mb-5">
 		                      <div class="col-lg-12">
 		                        <div class="form-group ">
@@ -29,6 +29,15 @@
 		                      </div>
 		                    	<div class="col-lg-12">
                                     <?php echo e(csrf_field()); ?>
+
+                                    <input type="hidden" name="payment_method" value="both" /> <!-- Can be card, account, both -->
+                                    <input type="hidden" name="description" value="Fund Wallet" /> <!-- Replace the value with your transaction description -->
+                                    <input type="hidden" name="country" value="NG" /> <!-- Replace the value with your transaction country -->
+                                    <input type="hidden" name="currency" value="NGN" /> <!-- Replace the value with your transaction currency -->
+                                    <input type="hidden" name="email" value="<?php echo e(Auth::user()->email); ?>" /> <!-- Replace the value with your customer email -->
+                                    <input type="hidden" name="firstname" value="<?php echo e(Auth::user()->first_name); ?>" /> <!-- Replace the value with your customer firstname -->
+                                    <input type="hidden" name="lastname" value="<?php echo e(Auth::user()->last_name); ?>" /> <!-- Replace the value with your customer lastname -->
+                                     <input type="hidden" name="phonenumber" value="<?php echo e(Auth::user()->phonenumber); ?>" /> <!-- Replace the value with your customer phonenumber -->
 
                             	<input type="hidden" name="product_id" value="18">
                               <input class="btn btn-primary btn-round waves-effect" value="<?php echo e(__('Purchase')); ?>" type="submit">

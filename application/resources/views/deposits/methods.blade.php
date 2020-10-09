@@ -33,7 +33,7 @@
               <div class="media border border-radius" style="border-radius: 6px">
                 <img class="align-self-center mr-3" src="{{url('/')}}/storage/imgs/smOMNQbvaoIgP8Y2TcA6DfgAdVdWsXe1Caww3aYV.png" alt="Generic placeholder image" style="width: 45px;">
                 <div class="media-body">
-                  <p><strong class="title pt-2 float-left">Paystack </strong><a href="{{url('/')}}/buyvoucher/paystack" class="btn btn-primary float-right mr-1">Add Credit</a></p>
+                  <p><strong class="title pt-2 float-left">Flutterwave </strong><a href="{{url('/')}}/buyvoucher/flutterwave" class="btn btn-primary float-right mr-1">Add Credit</a></p>
                 </div>
               </div>
               @endif

@@ -14,21 +14,12 @@
                     @endif
                 </row>
                 <div class="row">
-                    <div class="preview col-lg-4 col-md-12">
-                        <div class="preview-pic tab-content">
-                            <div class="tab-pane active show" id="product_1">
-                            	<img src="{{url('/')}}/storage/imgs/smOMNQbvaoIgP8Y2TcA6DfgAdVdWsXe1Caww3aYV.png
-" class="img-fluid">
-                            </div>
-                            
-                            </div>
-                                       
-                    </div>
+                   
                     <div class="details col-lg-8 col-md-12" id="buy_form">
-                        <h3 class="product-title m-b-0">{{__('Add funds to your wallet with your Paystack') }}</h3>                        
+                        <h3 class="product-title m-b-0">{{__('Add funds to your wallet with Flutterwave') }}</h3>                        
                         
                         <div class="action">
-                          <form class="d-flex justify-content-left" method="post" action="{{url('/')}}/buyvoucher/paystack">
+                          <form class="d-flex justify-content-left" method="post" action="{{ route('pay') }}">
                           	<div class="row mb-5">
 		                      <div class="col-lg-12">
 		                        <div class="form-group ">
@@ -38,6 +29,15 @@
 		                      </div>
 		                    	<div class="col-lg-12">
                                     {{csrf_field()}}
+                                    <input type="hidden" name="payment_method" value="both" /> <!-- Can be card, account, both -->
+                                    <input type="hidden" name="description" value="Fund Wallet" /> <!-- Replace the value with your transaction description -->
+                                    <input type="hidden" name="country" value="NG" /> <!-- Replace the value with your transaction country -->
+                                    <input type="hidden" name="currency" value="NGN" /> <!-- Replace the value with your transaction currency -->
+                                    <input type="hidden" name="email" value="{{ Auth::user()->email }}" /> <!-- Replace the value with your customer email -->
+                                    <input type="hidden" name="firstname" value="{{ Auth::user()->first_name }}" /> <!-- Replace the value with your customer firstname -->
+                                    <input type="hidden" name="lastname" value="{{ Auth::user()->last_name }}" /> <!-- Replace the value with your customer lastname -->
+                                     <input type="hidden" name="phonenumber" value="{{ Auth::user()->phonenumber }}" /> <!-- Replace the value with your customer phonenumber -->
+
                             	<input type="hidden" name="product_id" value="18">
                               <input class="btn btn-primary btn-round waves-effect" value="{{__('Purchase')}}" type="submit">
 		                    	</div>
