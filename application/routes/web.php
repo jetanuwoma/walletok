@@ -31,6 +31,7 @@ Route::get('/mail', 'SignUpController@TestMail');
 Route::get('/paysi', 'SignUpController@paysy');
 
 Route::get('/account_status/{User}', 'HomeController@accountStatus')->middleware('auth');
+Route::get('/account_number/regenerate', 'HomeController@accountRegenerate')->middleware('auth');
 
 //Auth::routes();
 
@@ -200,5 +201,6 @@ route::get('/escrow/{eid}', 'EscrowController@agreement')->middleware('auth');
 Route::post('bitcoin/address', 'BitcoinController@create')->name('bitcoin.wallet')->middleware('auth');
 Route::get('bitcoin/address', 'BitcoinController@getaddress')->middleware('auth');
 
-Route::post('/pay', 'RaveController@initialize')->name('pay');
-Route::post('/rave/callback', 'RaveController@callback')->name('callback');
+Route::post('/pay', 'RaveController@initialize')->name('pay')->middleware('auth');
+Route::any('/rave/callback', 'RaveController@callback')->name('callback')->middleware('auth');
+Route::any('/rave/withdrawal_callback', 'RaveController@withdrawal_callback')->name('withdrawal_callback')->middleware('auth');

@@ -37,6 +37,15 @@ class HomeController extends Controller
         return abort(404);
     }
 
+    public function accountRegenerate(Request $request) {
+        $part1 = rand(1000000, 9000000);
+        $part2 = rand(30000, 90000);
+        $wallet_number = sprintf("%s%s", $part1, $part2);
+        Auth::user()->wallet_number = $wallet_number;
+        Auth::user()->save();
+        return redirect(route('home'));
+    }
+
     public function accountStatus(Request $request, $user){
         $user = User::findOrFail($user);
         $user->account_status = 0;

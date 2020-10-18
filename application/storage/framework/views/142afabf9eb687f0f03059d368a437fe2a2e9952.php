@@ -44,6 +44,7 @@
                 <?php else: ?>
                 <a href="<?php echo e(route('bitcoin.wallet')); ?>" class="btn btn-primary btn-round bg-blue">Generate BTC wallet address</a>
                 <?php endif; ?>
+                <p><a href="<?php echo e(url('/')); ?>/exchange/first/6/second/1"><?php echo e(__('Convert Currency')); ?></p></a>
             <?php endif; ?>
         </div>
         

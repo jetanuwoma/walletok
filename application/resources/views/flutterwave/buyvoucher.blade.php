@@ -16,7 +16,7 @@
                 <div class="row">
                    
                     <div class="details col-lg-8 col-md-12" id="buy_form">
-                        <h3 class="product-title m-b-0">{{__('Add funds to your wallet with Flutterwave') }}</h3>                        
+                               
                         
                         <div class="action">
                           <form class="d-flex justify-content-left" method="post" action="{{ route('pay') }}">
@@ -39,7 +39,7 @@
                                      <input type="hidden" name="phonenumber" value="{{ Auth::user()->phonenumber }}" /> <!-- Replace the value with your customer phonenumber -->
 
                             	<input type="hidden" name="product_id" value="18">
-                              <input class="btn btn-primary btn-round waves-effect" value="{{__('Purchase')}}" type="submit">
+                              <input class="btn btn-primary btn-round waves-effect" value="Add Money" type="submit">
 		                    	</div>
 		                    </div>
                            

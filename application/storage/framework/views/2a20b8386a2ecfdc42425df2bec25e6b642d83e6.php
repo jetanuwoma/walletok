@@ -17,11 +17,9 @@
                         <li class="<?php echo e((Route::is('sendMoneyForm') ? 'active open' : '')); ?>"> 
                             <a href="<?php echo e(route('sendMoneyForm')); ?>"><i class="icon-arrow-right"></i><span><?php echo e(__('Send Money')); ?></span></a>
                         </li>
+            
                         <li class="<?php echo e((Route::is('requestMoneyForm') ? 'active open' : '')); ?>"> 
-                            <a href="<?php echo e(route('requestMoneyForm')); ?>"><i class="icon-arrow-left"></i><span><?php echo e(__('Request Money')); ?></span></a>
-                        </li>
-                        <li class="<?php echo e((Route::is('requestMoneyForm') ? 'active open' : '')); ?>"> 
-                            <a href="<?php echo e(route('requestMoneyForm')); ?>"><i class="icon-arrow-left"></i><span><?php echo e(__('Withdraw Money')); ?></span></a>
+                            <a href="<?php echo e(route('withdrawal.form')); ?>"><i class="icon-arrow-left"></i><span><?php echo e(__('Withdraw Money')); ?></span></a>
                         </li>
                         <li class="<?php echo e((Route::is('mymerchants') ? 'active open' : '')); ?>"> 
                             <a href="<?php echo e(route('mymerchants')); ?>"><i class="icon-speedometer"></i><span>

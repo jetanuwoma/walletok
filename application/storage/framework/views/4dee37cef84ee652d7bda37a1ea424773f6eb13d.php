@@ -24,15 +24,12 @@
           <?php else: ?>
           <div class="card">
               <div class="header">
-                <h2><strong><?php echo e(__('About')); ?></strong> <?php echo e($current_method->name); ?> <?php echo e(__('withdrawals')); ?></h2>
+               
               </div>
               <div class="body">
                 <div class="row">
                   <div class="col-lg-12">
-                      <div >
-                          <?php echo $current_method->comment; ?>
-
-                      </div>
+                     
                   </div>
                 </div>
               </div>
@@ -48,44 +45,19 @@
 
               
               <div class="row">
-                <div class="col-lg-4 col-xs-12" style="display:none">
-                  <div class="form-group <?php echo e($errors->has('merchant_site_url') ? ' has-error' : ''); ?>">
-                    <div class="form-group">
-                      <label for="deposit_method"><?php echo e(__('Withdrawal Currency')); ?> [ <span class="text-primary"><?php echo e(Auth::user()->currentCurrency()->code); ?></span> ]</label>
-                      <select class="form-control" id="withdrawal_currency" name="withdrawal_currency">
-                        <option value="<?php echo e(Auth::user()->currentCurrency()->id); ?>" data-value="<?php echo e(Auth::user()->currentCurrency()->id); ?>" selected><?php echo e(Auth::user()->currentCurrency()->name); ?> </option>
-                        <?php $__empty_1 = true; $__currentLoopData = $currencies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $currency): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <option value="<?php echo e($currency->id); ?>" data-value="<?php echo e($currency->id); ?>"><?php echo e($currency->name); ?></option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-
-
-                        <?php endif; ?>
-                      </select>
-                      <?php if($errors->has('withdrawal_currency')): ?>
-                        <span class="help-block">
-                            <strong><?php echo e($errors->first('withdrawal_currency')); ?></strong>
-                        </span>
-                    <?php endif; ?>
-                    </div>
-                  </div>
+               
                 </div>
                 <div class="col-lg-5 col-xs-12">
                   <div class="form-group <?php echo e($errors->has('merchant_site_url') ? ' has-error' : ''); ?>">
                     <div class="form-group">
-                      <label for="withdrawal_method"><?php echo e(__('Withdrawal Method')); ?></label>
-                      <select class="form-control" id="withdrawal_method" name="withdrawal_method">
-                        <?php $__empty_1 = true; $__currentLoopData = $methods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $method): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <option value="<?php echo e($method->id); ?>" <?php if($method->name == $current_method->name): ?> selected <?php endif; ?>><?php echo e($method->name); ?></option>
+                      <label for="bank_code"><?php echo e(__('Bank')); ?></label>
+                      <select class="" id="bank_code" name="bank_code">
+                          <?php $__empty_1 = true; $__currentLoopData = $banks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                          <option value="<?php echo e($bank->Code); ?>"><?php echo e($bank->Name); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-
-
                         <?php endif; ?>
                       </select>
-                      <?php if($errors->has('withdrawal_method')): ?>
-                        <span class="help-block">
-                            <strong><?php echo e($errors->first('withdrawal_method')); ?></strong>
-                        </span>
-                    <?php endif; ?>
+                     
                     </div>
                   </div>
                 </div>
@@ -117,23 +89,34 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="clearfix"></div>
+  
               <div class="row">
                 <div class="col">
                   <div class="form-group <?php echo e($errors->has('platform_id') ? ' has-error' : ''); ?>">
-                   <label for="platform_id"><?php echo e($current_method->method_identifier_field__name); ?> </label>
-                 <input type="text" name="platform_id" id="platform_id" class="form-control" required> 
-                    <?php if($errors->has('fee')): ?>
+                   <label for="platform_id">Account Name</label>
+                 <input type="text" name="account_name" id="account_name" class="form-control" required> 
+                    <?php if($errors->has('account_name')): ?>
                         <span class="help-block">
-                            <strong><?php echo e($errors->first('platform_id')); ?></strong>
+                            <strong><?php echo e($errors->first('account_name')); ?></strong>
                         </span>
                     <?php endif; ?>
                   </div>
                 </div>
               </div>
-              <div class="clearfix"></div>
-              
+              <div class="row">
+                  <div class="col">
+                    <div class="form-group <?php echo e($errors->has('platform_id') ? ' has-error' : ''); ?>">
+                     <label for="platform_id">Account Number</label>
+                   <input type="text" name="account_number" id="account_number" class="form-control" required> 
+                      <?php if($errors->has('account_number')): ?>
+                          <span class="help-block">
+                              <strong><?php echo e($errors->first('account_number')); ?></strong>
+                          </span>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+ 
               <div class="clearfix"></div>
               <div class="row">
                 <div class="col-lg-12">
@@ -151,19 +134,9 @@
 <?php $__env->startSection('js'); ?>
 <?php echo $__env->make('withdrawals.vue', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <script>
-$( "#withdrawal_method" )
-  .change(function () {
-    $( "#withdrawal_method option:selected" ).each(function() {
-      window.location.replace("<?php echo e(url('/')); ?>/withdrawal/request/"+$(this).val());
-  });
-});
 
-$( "#withdrawal_currency" )
-  .change(function () {
-    $( "#withdrawal_currency option:selected" ).each(function() {
-      window.location.replace("<?php echo e(url('/')); ?>/wallet/"+$(this).val());
-  });
-})
+  
+
 </script>
 
 <?php $__env->stopSection(); ?>

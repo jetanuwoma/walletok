@@ -119,6 +119,41 @@ class User extends \TCG\Voyager\Models\User
        }
     }
 
+    public function getWalletById($currency_id){
+         
+        // check if the user curency_id property is an existing currency id
+        // if it returns NULL that mean the currency was deleted and the user is using an obsolet currency as a default currency
+
+        if(Currency::where('id', $currency_id)->first() != NULL ){
+
+            //check if the user has a wallet on that currency if true return that wallet, else create a new wallet on that currency
+            
+            $currentWallet = $this->walletsCollection()->with('Currency')->where('currency_id', $currency_id)->first();
+
+            if ($currentWallet != NULL) {
+
+                return $currentWallet;
+            
+            } else {
+                // The currency exists in the database but the user does not have a wallet on that currency.
+                //Create a new wallet on that currency and  return it
+
+                $wallet = $this->newWallet( $currency_id);
+                return Wallet::with('Currency')->where('currency_id', $currency_id)->where('user_id', $this->id)->first();
+
+            }
+
+
+        }
+
+        $currency = Currency::orderBy('id','asc')->first();
+        $wallet = $this->newWallet($currency->id);
+
+        $this->currency_id  =  $currency->id;
+        $this->save();
+        return Wallet::with('Currency')->where('currency_id', $currency->id)->where('user_id', $this->id)->first();
+    }
+
     public function currentWallet(){
 
         // check if the user curency_id property is an existing currency id
@@ -158,6 +193,10 @@ class User extends \TCG\Voyager\Models\User
         return $this->currentWallet()->amount;
     }
 
+    public function currentWalletBalanceById($id){
+        return $this->getWalletById($id)->amount;
+    }
+
     public function walletByCurrencyId($id){
         if (!is_null($this->walletsCollection()->with('Currency')->where('currency_id',$id)->first())) {
             return $this->walletsCollection()->with('Currency')->where('currency_id',$id)->first();
@@ -186,6 +225,12 @@ class User extends \TCG\Voyager\Models\User
 
     public function setBalanceAttribute($value){
         $wallet = $this->currentWallet();
+        $wallet->amount = $value;
+        $wallet->save();
+    }
+
+    public function setBalanceAttributeById($id,$value){
+        $wallet = $this->getWalletById($id);
         $wallet->amount = $value;
         $wallet->save();
     }

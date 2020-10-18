@@ -44,6 +44,7 @@
                 @else
                 <a href="{{route('bitcoin.wallet')}}" class="btn btn-primary btn-round bg-blue">Generate BTC wallet address</a>
                 @endif
+                <p><a href="{{url('/')}}/exchange/first/6/second/1">{{ __('Convert Currency')}}</p></a>
             @endif
         </div>
         {{-- <div id="sparkline16" class="text-center"><canvas width="403" height="390" style="display: inline-block; width: 403.328px; height: 390px; vertical-align: top;"></canvas></div> --}}

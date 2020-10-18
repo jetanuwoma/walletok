@@ -169,8 +169,12 @@ class MoneyTransferController extends Controller
                 'net'   =>  $send->net
             ]));
 
-            $user->setBalanceAttribute($user->currentWalletBalance() + $request->amount);
-            Auth::user()->setBalanceAttribute(Auth::user()->currentWalletBalance() - $request->amount);
+            $fee = ($request->amount * 5/ 100);
+            $currency_id = Auth::user()->currentWallet()->currency_id; 
+            $sending_amount = $user->currentWalletBalanceById($currency_id) + $request->amount;
+
+            $user->setBalanceAttributeById($currency_id, $sending_amount);
+            Auth::user()->setBalanceAttribute(Auth::user()->currentWalletBalance() - $request->amount - $fee);
             flash(__('Your money has been successfully sent'), 'success');
            
         } else {
@@ -204,11 +208,10 @@ class MoneyTransferController extends Controller
 
             }
            
-            flash(__('Your Paypay withdrawal request has been sent for processing'), 'success');   
+            flash(__('Your withdrawal request has been sent for processing'), 'success');   
 
         }
         
-
         
         return  redirect(route('home'));
 

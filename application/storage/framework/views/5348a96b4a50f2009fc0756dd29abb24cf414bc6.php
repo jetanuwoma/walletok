@@ -22,6 +22,7 @@
 							<div class="body" style="padding-top: 0">
 								<div class="content">
 									<div class="number"><?php echo e(Auth::user()->getWalletNumber()); ?></div>
+									<p><a href="<?php echo e(url('/account_number/regenerate')); ?>"><?php echo e(__('Regenerate Account Number')); ?></p></a>
 								</div>
 							</div>
 						</div>

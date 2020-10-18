@@ -22,6 +22,7 @@
 							<div class="body" style="padding-top: 0">
 								<div class="content">
 									<div class="number">{{ Auth::user()->getWalletNumber() }}</div>
+									<p><a href="{{url('/account_number/regenerate')}}">{{ __('Regenerate Account Number')}}</p></a>
 								</div>
 							</div>
 						</div>

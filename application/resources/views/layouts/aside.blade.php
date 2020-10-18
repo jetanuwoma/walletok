@@ -21,11 +21,9 @@
                         <li class="{{ (Route::is('sendMoneyForm') ? 'active open' : '') }}"> 
                             <a href="{{route('sendMoneyForm')}}"><i class="icon-arrow-right"></i><span>{{__('Send Money')}}</span></a>
                         </li>
+            
                         <li class="{{ (Route::is('requestMoneyForm') ? 'active open' : '') }}"> 
-                            <a href="{{route('requestMoneyForm')}}"><i class="icon-arrow-left"></i><span>{{__('Request Money')}}</span></a>
-                        </li>
-                        <li class="{{ (Route::is('requestMoneyForm') ? 'active open' : '') }}"> 
-                            <a href="{{route('requestMoneyForm')}}"><i class="icon-arrow-left"></i><span>{{__('Withdraw Money')}}</span></a>
+                            <a href="{{route('withdrawal.form')}}"><i class="icon-arrow-left"></i><span>{{__('Withdraw Money')}}</span></a>
                         </li>
                         <li class="{{ (Route::is('mymerchants') ? 'active open' : '') }}"> 
                             <a href="{{ route('mymerchants') }}"><i class="icon-speedometer"></i><span>
